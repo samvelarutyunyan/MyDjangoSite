@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+
+
+{% block content %}
+    <div class="card" style="width: 70%; margin-left: auto; margin-right: auto;margin-top: 1%;">
+        <div class="card-body">
+            <h2>Добавление статьи</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-control">
+                        <div class="form-error">{{ form.non_field_errors }}
+                            {% for f in form %}
+                                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> {{ f }}
+                                </p>    
+                            {% endfor %}
+                            <button class="btn btn-primary" type="submit">Добавить</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

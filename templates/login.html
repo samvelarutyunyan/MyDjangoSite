@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <div style="margin-top: 1%">
+        <div class="container-fluid">
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="bg-image card shadow-1-strong"
+                         style="background:radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(106,68,76,1)100%);">
+                        <div class="card-body text-white">
+                            <h3 style="color: white;">Вход</h3>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-error">{{ form.non_field_errors }}</div>
+                                {% for f in form %}
+                                    <p><label class="col-sm-0 control-label"
+                                              for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+                                    <div class="form-error">{{ f.errors }}</div>
+                                {% endfor %}
+                                <button class="btn btn-primary" type="submit">Войти</button>
+                            </form>
+                            <a href="{% url 'register' %}">
+                                <button class="btn btn-secondary" type="submit">Зарегистрироваться</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

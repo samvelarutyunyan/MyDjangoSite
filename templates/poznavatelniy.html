@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <h1 style="color: white; margin-top: 1%">Познавательная категория</h1>
+    {% for post in object_list %}
+        <div style="margin-top: 1%">
+            <div class="container-fluid">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="bg-image card shadow-1-strong"
+                             style="background:radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(106,68,76,1)100%);">
+                            <div class="card-body text-white">
+                                <h2>{{ post.title }}</h2>
+                                <p>Автор поста: <a style="color: #FFF; text-decoration: none" href="{% url 'user_profile' post.author_id %}"><b>{{ post.author }}</b></a></p>
+                                <p>Категория: <b>{{ post.category }}</b></p>
+                                <p>Дата создания: <b>{{ post.time }}</b></p>
+                                <p>{{ post.body }}</p>
+                                <a href="{% url 'post_detail' post.pk %}">
+                                    <button type="button" class="btn btn-primary">Подробнее</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
+{% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?q={{ q }}&page={{ page_obj.previous_page_number }}">&lt;</a>
+                </li>
+            {% endif %}
+            {% for p in paginator.page_range %}
+                {% if page_obj.number == p %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ q }}&page={{ p }}">{{ p }}</a>
+                    </li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ q }}&page={{ p }}">{{ p }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?q={{ q }}&page={{ page_obj.next_page_number }}">&gt;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+

@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <div style="margin-top: 1%">
+        <div class="container-fluid">
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="bg-image card shadow-1-strong"
+                         style="background:radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(106,68,76,1)100%);">
+                        <div class="card-body text-white">
+                            <h2>{{ post.title }}</h2>
+                            <p>Автор поста: <a style="color: #FFF; text-decoration: none" href="{% url 'user_profile' post.author_id %}"><b>{{ post.author }}</b></a></p>
+                            <p>{{ post.body }}</p>
+                            <img src="https://palchevsky.ru/images/blogpost.png" alt="Нейросетевая система Паводок"
+                                 width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
