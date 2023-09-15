@@ -3,9 +3,6 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-
-
-
 class Post(models.Model):
     title = models.CharField(max_length=200)  # Заголовок поста
     author = models.ForeignKey(  # Автор поста, которого выбираем в адининстративной панели управления
