@@ -94,7 +94,7 @@ class RegisterUser(DataMixin, CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('index')
 
 
 class LoginUser(DataMixin, LoginView):
@@ -109,7 +109,7 @@ class LoginUser(DataMixin, LoginView):
 
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect('index')
 
 
 class UserProfile(TemplateView):
@@ -133,10 +133,10 @@ def addpage(request):
         if form.is_valid():
             try:
                 Post.objects.create(**form.cleaned_data)
-                return redirect('home')
+                return redirect('index')
             except:
                 form.add_error(None, 'Ошибка добавления поста')
-                return redirect('home')
+                return redirect('index')
     else:
         form = AddPageForm()
     return render(request, 'add_page.html', {'form': form})
