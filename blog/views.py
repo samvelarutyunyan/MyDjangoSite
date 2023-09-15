@@ -13,7 +13,7 @@ from .utils import DataMixin
 class Bloglist(ListView):
     paginate_by = 5
     model = Post
-    template_name = 'home.html'
+    template_name = 'index.html'
 
     def get_queryset(self):
         queryset = Post.objects.all().order_by('-time')
@@ -37,7 +37,7 @@ class AboutPageView(TemplateView):
 class SearchResultsView(ListView):
     paginate_by = 5
     model = Post
-    template_name = 'home.html'
+    template_name = 'index.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
